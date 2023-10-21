@@ -16,10 +16,11 @@ setup(
     maintainer='kyu8',
     maintainer_email='guillemsenabre@gmail.com',
     description='TODO: Package description',
-    license='TODO: License declaration',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+		'listener = robotic_arm_pkg.joint_listener:main',
         ],
     },
 )
