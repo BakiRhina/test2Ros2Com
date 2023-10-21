@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <sdf version="1.6">
   <world name="two_joint_arm_world">
 
@@ -31,6 +32,11 @@
 
     <!-- Robotic Arm Model -->
     <model name="two_joint_arm">
+
+      <plugin
+        filename="libignition-gazebo-joint-state-publisher-system.so"
+        name="ignition::gazebo::systems::JointStatePublisher">
+      </plugin>
       
       <!-- Base Link -->
       <link name="base_link">
@@ -116,5 +122,6 @@
         <pose>0 0 0.3 0 0 0</pose>
       </joint>
     </model>
+
   </world>
 </sdf>
