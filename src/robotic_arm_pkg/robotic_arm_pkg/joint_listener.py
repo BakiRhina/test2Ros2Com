@@ -15,7 +15,7 @@ class JointStateListener(Node):
         # )
         self.subscription = self.create_subscription(
             JointState,
-            '/joint_states',
+            '/world/two_joint_arm_world/model/two_joint_arm/joint_state',
             self.listener_callback,
             10)
 
