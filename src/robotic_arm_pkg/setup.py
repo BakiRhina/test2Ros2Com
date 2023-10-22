@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
 		'listener = robotic_arm_pkg.joint_listener:main',
+		'processor = robotic_arm_pkg.joint_processor:main',
         ],
     },
 )
