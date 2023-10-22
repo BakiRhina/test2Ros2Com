@@ -1,43 +1,59 @@
+import csv
+import os
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 
-class JointProcessor(Node):
+class JointStateProcessor(Node):
 
     def __init__(self):
-        super().__init__('joint_processor')
-
-        # Subscriber to read joint states
+        super().__init__('joint_state_listener')
         self.subscription = self.create_subscription(
-            JointState,
-            '/world/two_joint_arm_world/model/two_joint_arm/joint_state',
-            self.joint_callback,
-            10)
+            JointState, # message type
+            '/world/two_joint_arm_world/model/two_joint_arm/joint_state', # topic
+            self.listener_callback,
+            10) # message queue
+        
+        # Initialize the csv file and keep it opened (better performance)
+        self.csv_file_path = '~/gz_ros2_test2/src/csv_files/joint_states.csv'
+        self.csv_file = self.initialize_csv_file()
 
-        # Publisher to send joint commands
-        self.publisher_ = self.create_publisher(JointState, 'commanded_joint_states', 10)
+    def initialize_csv_file(self):
+        
+        # expand the file path so it's correctly expanded.
+        expanded_file_path = os.path.expanduser(self.csv_file_path)
 
-    def joint_callback(self, msg):
-        # For simplicity, if joint angle is > 0.5, set it to 0, otherwise set to 1
-        if msg.position[0] > 0.5:
-            new_position = 0.0
+        # check that the file doesn't already exists
+        if not os.path.isfile(expanded_file_path):
+
+            csv_file = open(expanded_file_path, 'w', newline='')
+
+            # create a csv writer object to add rows data into the file
+            csv_writer = csv.writer(csv_file)
+
+            # Writing the header of the CSV file
+            header = ['time_sec', 'time_nsec', 'joint_name', 'position', 'velocity', 'effort']
+            csv_writer.writerow(header)
+        
         else:
-            new_position = 1.0
+            csv_file = open(expanded_file_path, 'a', newline = '')
+        
+        return csv_file
 
-        # Construct a new JointState message
-        commanded_joint_state = JointState()
-        commanded_joint_state.name = ["joint1"]
-        commanded_joint_state.position = [new_position]
-
-        # Publish the new command
-        self.publisher_.publish(commanded_joint_state)
-        self.get_logger().info(f"Sent commanded position: {new_position}")
+    # subscribe to node and receive data
+    def listener_callback(self, msg):
+        self.get_logger().info('Received joint states:')
+        csv_writer = csv.writer(self.csv_file)
+        for name, position, velocity, effort in zip(msg.name, msg.position, msg.velocity, msg.effort):
+            self.get_logger().info(f'Joint: {name}, Position: {position}, Velocity: {velocity}, Effort: {effort}')
+            row = [msg.header.stamp.sec, msg.header.stamp.nanosec, name, position, velocity, effort]
+            csv_writer.writerow(row)
 
 def main(args=None):
     rclpy.init(args=args)
-    joint_processor = JointProcessor()
-    rclpy.spin(joint_processor)
-    joint_processor.destroy_node()
+    joint_state_processor = JointStateProcessor()
+    rclpy.spin(joint_state_processor)
+    joint_state_processor.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
