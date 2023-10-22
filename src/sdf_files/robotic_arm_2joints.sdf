@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.8">
   <world name="two_joint_arm_world">
-    
+
     <light type="directional" name="sun">
         <cast_shadows>true</cast_shadows>
         <pose>0 0 10 0 0 0</pose>
@@ -35,6 +35,8 @@
               <size>10 10</size>
             </plane>
           </geometry>
+
+          <!-- COLOR!-->
           <material>
             <ambient>0.8 0.8 0.8 1</ambient>
             <diffuse>0.8 0.8 0.8 1</diffuse>
@@ -71,8 +73,12 @@
               <size>0.1 0.1 0.2</size>
             </box>
           </geometry>
+
+          <!-- COLOR!-->
           <material>
-            <ambient>0 1 0 1</ambient>  <!-- color green (change)-->
+            <ambient>1.0 0.0 0.0 1</ambient>
+            <diffuse>1.0 0.0 0.0 1</diffuse>
+            <specular>1.0 0.0 0.0 1</specular>
           </material>
         </visual>
       </link>
@@ -93,6 +99,13 @@
               <size>0.05 0.05 0.5</size>
             </box>
           </geometry>
+
+          <!-- COLOR!!-->
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
         </visual>
       </link>
 
@@ -112,8 +125,12 @@
               <size>0.04 0.04 0.4</size>
             </box>
           </geometry>
+
+          <!-- COLOR !!-->
           <material>
-            <ambient>0 0 1 1</ambient>  <!-- color green (change)-->
+            <ambient>1.0 0.0 0.0 1</ambient>
+            <diffuse>1.0 0.0 0.0 1</diffuse>
+            <specular>1.0 0.0 0.0 1</specular>
           </material>
         </visual>
       </link>
