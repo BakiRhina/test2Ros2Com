@@ -7,7 +7,7 @@ class JointStateListener(Node):
         super().__init__('joint_state_listener')
 
         self.get_logger().info('Starting Node')
-        
+
         # create_subscription is from class Node (rclpy.node) -->
         # create_subscription(
         #   <message type>,
@@ -19,13 +19,19 @@ class JointStateListener(Node):
         self.subscription = self.create_subscription(
             JointState,
             '/world/two_joint_arm_world/model/two_joint_arm/joint_state',
-            self.listener_callback,
+            self.check_data,
             10)
 
     def listener_callback(self, msg):
         self.get_logger().info('Received joint states:')
         for name, position in zip(msg.name, msg.position):
             self.get_logger().info(f'Joint: {name}, Position: {position}')
+    
+    def check_data(self, msg):
+        if msg:
+            self.listener_callback
+        else:
+            self.get_logger().info('No data to process')
 
 def main(args=None):
     rclpy.init(args=args)
