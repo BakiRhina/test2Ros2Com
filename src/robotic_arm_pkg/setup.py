@@ -23,6 +23,7 @@ setup(
 		'listener = robotic_arm_pkg.joint_listener:main',
 		'processor = robotic_arm_pkg.joint_processor:main',
 		'storage = robotic_arm_pkg.joint_storage:main',
+		'controller = robotic_arm_pkg.joint_controller:main',
         ],
     },
 )
