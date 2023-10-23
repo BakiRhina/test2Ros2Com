@@ -2,42 +2,44 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 
-class JointProcessor(Node):
-
+class JointStateListener(Node):
     def __init__(self):
-        super().__init__('joint_processor')
-
-        # Subscriber to read joint states
+        super().__init__('joint_state_listener')
+        # create_subscription is from class Node (rclpy.node) -->
+        # create_subscription(
+        #   <message type>,
+        #   <topic to subscribe>,
+        #   <call to custom function>,
+        #   queue size (how many messages can be stored in the queue if they
+        # arrive faster than they're being processed),
+        # )
         self.subscription = self.create_subscription(
             JointState,
-            'joint_states',
-            self.joint_callback,
+            '/world/two_joint_arm_world/model/two_joint_arm/joint_state',
+            self.listener_callback,
             10)
 
-        # Publisher to send joint commands
-        self.publisher_ = self.create_publisher(JointState, 'commanded_joint_states', 10)
+    def listener_callback(self, msg):
+        self.get_logger().info('Received joint states:')
+        for name, position in zip(msg.name, msg.position):
+            self.get_logger().info(f'Joint: {name}, Position: {position}')
+        
+        self.average_data(msg.position)
 
-    def joint_callback(self, msg):
-        # For simplicity, if joint angle is > 0.5, set it to 0, otherwise set to 1
-        if msg.position[0] > 0.5:
-            new_position = 0.0
+    def average_data(self, data):
+        if data:
+            average_data = sum(data) / len (data)
+            self. get_logger().info(f'Average joint position: {average_data}')
+        
         else:
-            new_position = 1.0
+            self.get_logger().info(f'No data to process')
 
-        # Construct a new JointState message
-        commanded_joint_state = JointState()
-        commanded_joint_state.name = ["joint1"]
-        commanded_joint_state.position = [new_position]
-
-        # Publish the new command
-        self.publisher_.publish(commanded_joint_state)
-        self.get_logger().info(f"Sent commanded position: {new_position}")
 
 def main(args=None):
     rclpy.init(args=args)
-    joint_processor = JointProcessor()
-    rclpy.spin(joint_processor)
-    joint_processor.destroy_node()
+    joint_state_listener = JointStateListener()
+    rclpy.spin(joint_state_listener)
+    joint_state_listener.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':

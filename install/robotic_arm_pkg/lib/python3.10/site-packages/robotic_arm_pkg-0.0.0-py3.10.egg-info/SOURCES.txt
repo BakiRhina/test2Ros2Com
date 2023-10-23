@@ -12,6 +12,7 @@ resource/robotic_arm_pkg
 robotic_arm_pkg/__init__.py
 robotic_arm_pkg/joint_listener.py
 robotic_arm_pkg/joint_processor.py
+robotic_arm_pkg/joint_storage.py
 test/test_copyright.py
 test/test_flake8.py
 test/test_pep257.py
