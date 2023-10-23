@@ -23,6 +23,17 @@ class JointStateListener(Node):
         self.get_logger().info('Received joint states:')
         for name, position in zip(msg.name, msg.position):
             self.get_logger().info(f'Joint: {name}, Position: {position}')
+        
+        self.average_data(msg.position)
+
+    def average_data(self, data):
+        if data:
+            average_data = sum(data) / len (data)
+            self. get_logger().info(f'Average joint position: {average_data}')
+        
+        else:
+            self.get_logger().info(f'No data to process')
+
 
 def main(args=None):
     rclpy.init(args=args)
