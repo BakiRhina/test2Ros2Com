@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
 		'listener = robotic_arm_pkg.joint_listener:main',
 		'processor = robotic_arm_pkg.joint_processor:main',
+		'storage = robotic_arm_pkg.joint_storage:main',
         ],
     },
 )
