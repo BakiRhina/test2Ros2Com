@@ -5,6 +5,9 @@ from sensor_msgs.msg import JointState
 class JointStateListener(Node):
     def __init__(self):
         super().__init__('joint_state_listener')
+
+        self.get_logger().info('Starting Node')
+        
         # create_subscription is from class Node (rclpy.node) -->
         # create_subscription(
         #   <message type>,
