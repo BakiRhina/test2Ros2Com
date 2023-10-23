@@ -24,7 +24,7 @@ class jointController(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    robot_arm_controller = RobotArmController()
+    robot_arm_controller = jointController()
     rclpy.spin(robot_arm_controller)
     rclpy.shutdown()
 
