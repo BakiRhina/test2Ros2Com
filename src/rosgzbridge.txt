@@ -1,0 +1,1 @@
+JOINT POSITIONS: ros2 run ros_gz_bridge parameter_bridge /world/two_joint_arm_world/model/two_joint_arm/joint_state@sensor_msgs/msg/JointState]gz.msgs.ModelW
