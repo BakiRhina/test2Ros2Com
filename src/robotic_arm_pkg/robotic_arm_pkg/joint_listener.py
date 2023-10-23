@@ -29,7 +29,7 @@ class JointStateListener(Node):
     
     def check_data(self, msg):
         if msg:
-            self.listener_callback
+            self.listener_callback(msg)
         else:
             self.get_logger().info('No data to process')
 
