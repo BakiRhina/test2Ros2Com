@@ -4,6 +4,15 @@
 
     <!-- ENVIRONMENT-->
 
+    <physics name="1ms" type="ignored">
+        <max_step_size>0.001</max_step_size>
+        <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin
+        filename="gz-sim-physics-system"
+        name="gz::sim::systems::Physics">
+    </plugin>
+
     <environment>
       <shadows>1</shadows>
     </environment>
@@ -62,8 +71,11 @@
       
       <!-- Base Link -->
       <link name="base_link">
-        <static>true</static> <!-- Not movable-->
+
+        <!--<static>true</static>  Not movable-->
+
         <pose>0 0 0.1 0 0 0</pose>
+
         <collision name="base_collision">
           <geometry>
             <box>
@@ -71,6 +83,7 @@
             </box>
           </geometry>
         </collision>
+
         <visual name="base_visual">
           <geometry>
             <box>
@@ -85,6 +98,18 @@
             <specular>1.0 0.0 0.0 1</specular>
           </material>
         </visual>
+
+        <inertial>
+          <mass>100</mass>
+          <inertia>
+            <ixx>166.6667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>166.6667</iyy>
+            <iyz>0</iyz>
+            <izz>166.6667</izz>
+          </inertia>
+        </inertial>
       </link>
 
       <!-- First Link (attached to base) -->
