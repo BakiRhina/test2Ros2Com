@@ -1,31 +1,26 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64
-import math
 
-class jointController(Node):
+class JointTorqueController(Node):
     def __init__(self):
-        super().__init__('robot_arm_controller')
-        self.joint1_publisher = self.create_publisher(Float64, '/two_joint_arm/joint1_position_controller/command', 10)
-        self.joint2_publisher = self.create_publisher(Float64, '/two_joint_arm/joint2_position_controller/command', 10)
-        self.timer = self.create_timer(0.1, self.update_joint_positions)
+        super().__init__('joint_torque_controller')
+        self.publisher_joint0 = self.create_publisher(Float64, '/two_joint_arm/joint0/pos_eff', 10)
+        self.publisher_joint1 = self.create_publisher(Float64, '/two_joint_arm/joint1/pos_eff', 10)
+        self.timer = self.create_timer(1.0, self.timer_callback)
 
-        self.angle = 0.0
-
-    def update_joint_positions(self):
+    def timer_callback(self):
         msg = Float64()
-        msg.data = 1.0 * math.sin(self.angle)
-        self.joint1_publisher.publish(msg)
-
-        msg.data = 1.0 * math.sin(self.angle + math.pi / 2)
-        self.joint2_publisher.publish(msg)
-
-        self.angle += 0.01
+        msg.data = 1.0  # Apply a constant torque of 1.0 Nm
+        self.publisher_joint0.publish(msg)
+        self.publisher_joint1.publish(msg)
+        self.get_logger().info('Publishing: "%s"' % msg.data)
 
 def main(args=None):
     rclpy.init(args=args)
-    robot_arm_controller = jointController()
-    rclpy.spin(robot_arm_controller)
+    joint_torque_controller = JointTorqueController()
+    rclpy.spin(joint_torque_controller)
+    joint_torque_controller.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
