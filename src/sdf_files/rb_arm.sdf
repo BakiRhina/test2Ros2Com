@@ -130,14 +130,14 @@
                             <!-- Motor 0 link -->
 
       <link name="motor0">
-        <pose>0 0 0.075 0 0 0</pose> 
+        <pose>0 0 0.08 0 0 0</pose> 
 
             <!-- COLLISION -->
             <collision name="motor0_collision">
                 <geometry>
                     <cylinder>
                         <radius>0.025</radius>
-                        <length>0.05</length>
+                        <length>0.055</length>
                     </cylinder>
                 </geometry>
             </collision>
@@ -147,7 +147,7 @@
                 <geometry>
                     <cylinder>
                         <radius>0.025</radius> <!-- 5 cm diameter -->
-                        <length>0.05</length> <!-- 2 cm height -->
+                        <length>0.055</length> <!-- 5.5 cm height -->
                     </cylinder>
                 </geometry>
                 <material>
@@ -173,7 +173,7 @@
                             
       <link name="motor1">
 
-        <pose relative_to="motor0">0.02 0 0 0 1.57079632679 0</pose> 
+        <pose relative_to="motor0">0.035 0 0 0 1.57079632679 0</pose> 
 
             <!-- COLLISION -->
             <collision name="motor1 collision">
@@ -190,7 +190,7 @@
                 <geometry>
                     <cylinder>
                         <radius>0.02</radius> <!-- 4 cm diameter -->
-                        <length>0.04</length> <!-- 2 cm height -->
+                        <length>0.05</length> <!-- 5 cm height -->
                     </cylinder>
                 </geometry>
                 <material>
