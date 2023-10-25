@@ -173,7 +173,7 @@
                             
       <link name="motor1">
 
-        <pose>0 0 0.075 0 0 0</pose> 
+        <pose frame="motor0">0.02 0 0 0 1.57079632679 0</pose> 
 
             <!-- COLLISION -->
             <collision name="motor1 collision">
@@ -200,7 +200,7 @@
                 </material>
             </visual>
             <inertial>
-                <mass>10</mass>
+                <mass>0.5</mass>
                 <inertia>
                     <ixx>0.001</ixx>
                     <ixy>0</ixy>
@@ -215,7 +215,7 @@
 
                         <!--      JOINTS      -->
 
-      <joint name="motor_joint" type="revolute">
+      <joint name="joint0" type="revolute">
          <parent>base_link</parent>
           <child>motor0</child>
           <axis>
@@ -226,7 +226,20 @@
               </limit>
           </axis>
           <pose>0 0 -0.025 0 0 0</pose>
-      </joint>                                    
+      </joint>
+      
+      <joint name="joint1" type="revolute">
+        <parent>motor0</parent>
+         <child>motor1</child>
+         <axis>
+             <xyz>0 0 1</xyz> <!-- Z-axis rotation -->
+             <limit>
+             <lower>-3.14159265359</lower> <!-- -180 degrees -->
+             <upper>3.14159265359</upper>  <!-- 180 degrees -->
+             </limit>
+         </axis>
+         <pose>0 0 0 0 0 0</pose>
+      </joint>     
     </model>
   </world>
 </sdf>
