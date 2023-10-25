@@ -10,6 +10,7 @@ setup.py
 ../../build/robotic_arm_pkg/robotic_arm_pkg.egg-info/zip-safe
 resource/robotic_arm_pkg
 robotic_arm_pkg/__init__.py
+robotic_arm_pkg/joint_controller.py
 robotic_arm_pkg/joint_listener.py
 robotic_arm_pkg/joint_processor.py
 robotic_arm_pkg/joint_storage.py
