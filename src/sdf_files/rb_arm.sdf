@@ -173,7 +173,7 @@
                             
       <link name="motor1">
 
-        <pose frame="motor0">0.02 0 0 0 1.57079632679 0</pose> 
+        <pose relative_to="motor0">0.02 0 0 0 1.57079632679 0</pose> 
 
             <!-- COLLISION -->
             <collision name="motor1 collision">
