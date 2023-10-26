@@ -250,6 +250,10 @@
 
                         <!--      JOINTS      -->
 
+
+                            <!-- joint 0  -->
+
+
       <joint name="joint0" type="revolute">
          <parent>base_link</parent>
           <child>motor0</child>
@@ -264,6 +268,10 @@
           <pose>0 0 -0.025 0 0 0</pose>
       </joint>
       
+
+                            <!-- joint 1  -->
+
+
       <joint name="joint1" type="revolute">
         <parent>motor0</parent>
          <child>motor1</child>
@@ -277,6 +285,14 @@
          </axis>
          <pose>0 0 0 0 0 0</pose>
       </joint>     
+
+                            <!-- fixed joint 0  -->
+
+      <joint name="fixed1" type="fixed">
+        <parent>motor1</parent>
+        <child>segment1</child>
+        <pose>-0.057 0 0.005 0 -1.57079632679 0</pose>
+      </joint>                              
     </model>
   </world>
 </sdf>
