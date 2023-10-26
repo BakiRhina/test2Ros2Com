@@ -210,8 +210,10 @@
           <axis>
               <xyz>0 0 1</xyz> <!-- Z-axis rotation -->
               <limit>
-              <lower>-3.14159265359</lower> <!-- -180 degrees -->
-              <upper>3.14159265359</upper>  <!-- 180 degrees -->
+                <lower>-3.14159265359</lower> <!-- -180 degrees -->
+                <upper>3.14159265359</upper>  <!-- 180 degrees -->
+                <effort>-1e6</effort>
+                <effort>1e6</effort>
               </limit>
           </axis>
           <pose>0 0 -0.025 0 0 0</pose>
@@ -223,8 +225,9 @@
          <axis>
              <xyz>0 0 1</xyz> <!-- Z-axis rotation -->
              <limit>
-             <lower>-3.14159265359</lower> <!-- -180 degrees -->
-             <upper>3.14159265359</upper>  <!-- 180 degrees -->
+                <lower>-3.14159265359</lower> <!-- -180 degrees -->
+                <upper>3.14159265359</upper>  <!-- 180 degrees -->
+                <effort>-1e6 1e6</effort>
              </limit>
          </axis>
          <pose>0 0 0 0 0 0</pose>
