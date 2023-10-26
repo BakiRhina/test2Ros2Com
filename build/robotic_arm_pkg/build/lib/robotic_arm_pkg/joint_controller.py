@@ -11,7 +11,7 @@ class JointTorqueController(Node):
 
     def timer_callback(self):
         msg = Float64()
-        msg.data = 1.0  # Apply a constant torque of 1.0 Nm
+        msg.data = 0.5  # Apply a constant torque of x Nm
         self.publisher_joint0.publish(msg)
         self.publisher_joint1.publish(msg)
         self.get_logger().info('Publishing: "%s"' % msg.data)
