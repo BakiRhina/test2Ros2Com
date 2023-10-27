@@ -10,11 +10,15 @@ class JointTorqueController(Node):
         self.timer = self.create_timer(1.0, self.timer_callback)
 
     def timer_callback(self):
-        msg = Float64()
-        msg.data = 0.5  # Apply a constant torque of x Nm
-        self.publisher_joint0.publish(msg)
-        self.publisher_joint1.publish(msg)
-        self.get_logger().info('Publishing: "%s"' % msg.data)
+        msg_joint0 = Float64()
+        msg_joint1 = Float64()
+        msg_joint0.data = 0.5  # Apply a constant torque of x Nm
+        msg_joint1.data = 10
+        self.publisher_joint0.publish(msg_joint0)
+        self.publisher_joint1.publish(msg_joint1)
+
+        self.get_logger().info('Joint 0 torque: "%s"' % msg_joint0.data)
+        self.get_logger().info('Joint 1 torque: "%s"' % msg_joint1.data)
 
 def main(args=None):
     rclpy.init(args=args)
