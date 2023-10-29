@@ -123,7 +123,7 @@
 
       <link name="motor0">
 
-        <pose>0 0 0.08 0 0 0</pose> 
+        <pose>0 0 0.07 0 0 0</pose> 
 
         <!-- COLLISION -->
         <collision name="motor0_collision">
@@ -209,7 +209,7 @@
 
       <link name="segment1">
 
-        <pose relative_to="motor1">-0.057 0 0.005 0 -1.57079632679 0</pose> 
+        <pose relative_to="motor1">-0.06 0 0.005 0 -1.57079632679 0</pose> 
 
         <!-- COLLISION -->
         <collision name="motor1 collision">
